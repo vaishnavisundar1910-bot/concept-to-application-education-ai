@@ -1,0 +1,46 @@
+import React, { useState } from 'react';
+
+function ConceptToApp() {
+  const [stage, setStage] = useState('concept'); // Stages: concept, quiz, project, app
+  const [userInput, setUserInput] = useState('');
+
+  const handleNext = () => {
+    if (stage === 'concept') setStage('quiz');
+    else if (stage === 'quiz') setStage('project');
+    else if (stage === 'project') setStage('app');
+  };
+
+  return (
+    <div className="module">
+      <h1>Learn Machine Learning</h1>
+      {stage === 'concept' && (
+        <div>
+          <p>Concept: Machine learning is a subset of AI where algorithms learn from data.</p>
+          <button onClick={handleNext}>Understood, Next</button>
+        </div>
+      )}
+      {stage === 'quiz' && (
+        <div>
+          <p>Quiz: What does ML use to make predictions?</p>
+          <input value={userInput} onChange={(e) => setUserInput(e.target.value)} />
+          <button onClick={handleNext}>Submit & Next</button>
+        </div>
+      )}
+      {stage === 'project' && (
+        <div>
+          <p>Mini-Project: Build a simple linear regression model.</p>
+          <textarea placeholder="Write your code here..." />
+          <button onClick={handleNext}>Complete & Next</button>
+        </div>
+      )}
+      {stage === 'app' && (
+        <div>
+          <p>Application: Deploy your model to predict house prices.</p>
+          <iframe src="https://example-simulation.com" title="ML App"></iframe>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default ConceptToApp;
